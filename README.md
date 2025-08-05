@@ -1,45 +1,40 @@
-# Loan Default Prediction with BERT & Topic Modeling
-This project predicts the likelihood of a borrower defaulting on a loan by combining structured financial data with unstructured borrower narratives. It uses traditional machine learning models enhanced with BERT-derived risk scores, SHAP for model explainability, and BERTopic for thematic topic modeling.
+# ML System for Credit Default Prediction Using BERT, SHAP & Topic Modeling
+Built a machine learning pipeline to predict loan defaults using a combination of structured financial attributes and unstructured borrower narratives. Integrated fine-tuned BERT embeddings, SHAP explainability, and BERTopic to improve prediction accuracy and model interpretability.
 
-## Project Overview
-- **Goal**: Accurately predict loan default and understand the features — both numerical and textual — driving risk.
-- **Dataset**: LendingClub loan data with financial attributes and borrower-provided loan descriptions.(Link:https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv?select=loan.csv )
-- **Approach**:
-  - Traditional models (Logistic Regression, Random Forest, XGBoost)
-  - BERT-based risk scoring from borrower narratives
-  - SHAP for interpretability
-  - BERTopic to extract borrower intent themes
---
-## Key Features
-- **Fine-tuned BERT** model to convert borrower descriptions into a default risk score.
-- **Traditional ML models** using structured + BERT features.
-- **SHAP explainability** to show what drives each prediction.
-- **BERTopic** to extract common narrative clusters and link them to risk.
-- Evaluation with accuracy, F1-score, ROC-AUC, threshold tuning.
+## Dataset: 
+ - Source: <a href="https://www.kaggle.com/datasets/adarshsng/lending-club-loan-data-csv?select=loan.csv" target="_blank">LendingClub Loan Dataset (Kaggle)</a>
+ - Contents: Financial metadata, borrower demographics, and loan purpose narratives
 
+## Architecture
+- Preprocessing: Cleaned structured loan data (categoricals, nulls, outliers)
+- BERT Risk Score: Fine-tuned BERT to convert narratives into bert_risk_score
+- Topic Modeling: Used BERTopic to extract borrower themes by risk pattern
+- Modeling: Trained Logistic Regression, Random Forest, XGBoost on structured + BERT + Topic ID features
+- Explainability: Integrated SHAP for global and local interpretation
+- Evaluation: Measured performance using F1-score, ROC-AUC, accuracy, and calibrated thresholds
 
-## Project Summary
-
-- Built a fine-tuned BERT model to generate borrower `bert_risk_score`
-- Trained and evaluated Logistic Regression, Random Forest, and XGBoost
-- Applied SHAP for global and local feature-level interpretability
-- Used BERTopic to cluster borrower intent and assess topic-level risk
-- Best performance: **Logistic Regression (F1: 0.7153, ROC-AUC: 0.8647)**
+## Tools and Technologies
+- Languages: Python
+- Libraries: Scikit-learn, XGBoost, HuggingFace Transformers, BERTopic, SHAP
+- Dev Tools: Jupyter Notebook, Pandas, NumPy, Matplotlib, Seaborn
 
 ## Research Questions
-
 - Can borrower narratives meaningfully improve credit risk prediction?
 - How do narrative themes correlate with loan default probability?
 - Which features — structured or unstructured — are most predictive?
 - How can we make our risk models more explainable?
 
-## Key Takeaways
+## Results & Insights
+- `bert_risk_score` was the most predictive feature across all models
+- Logistic Regression achieved best performance (F1: 0.7153, ROC-AUC: 0.8647)
+- SHAP visualizations enabled case-level transparency for stakeholders
+- BERTopic identified high-risk clusters (e.g. medical expenses, small business loans)
+- Topic IDs improved interpretability but didn’t significantly enhance model accuracy
 
-1. BERT-derived `bert_risk_score` was the **most impactful feature** across all models.
-2. Logistic Regression outperformed tree-based models with simpler feature interaction.
-3. SHAP force plots provided case-level transparency into individual predictions.
-4. BERTopic revealed **high-risk narrative clusters** (e.g., business loans, medical bills).
-5. Adding topic IDs as features did not improve ML performance but enhanced interpretability.
+## Future Enhancements
+- Deploy model as a REST API (FastAPI or Flask) for real-time credit scoring
+- Build interactive dashboards for model insights using Streamlit
+- Integrate economic indicators or credit score datasets for richer feature space
 
 ## How to Reproduce
 
